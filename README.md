@@ -1,9 +1,8 @@
 # mariadb-podman-socket-activation
 
-Let's create a templated systemd user service to run rootless Podman
-and start MariaDB with socket activation. In this example we will only
-make use of UNIX sockets and thus be able to run the container with
-__--network=none__.
+A demo of a templated systemd user service that runs rootless Podman
+and starts MariaDB with socket activation. By only using UNIX sockets
+it's possible to run the container with __--network=none__.
 
 ## Requirements
 

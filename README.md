@@ -89,7 +89,7 @@ systemctl --user start mariadb@foobar.socket
 To connect to the new MariaDB instance _foobar_
 
 ```
-$ mariadb --socket ~/sock-a -p -u example-user
+$ mariadb --socket ~/mariadb-socket.foobar -p -u example-user
 Enter password: 
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 6

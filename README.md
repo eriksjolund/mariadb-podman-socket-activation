@@ -4,7 +4,7 @@ A demo of a templated systemd user service that runs rootless Podman
 and starts MariaDB with socket activation.
 
 Interestingly, it's possible to use `podman run --network=none ...`
-both with UNIX sockets and TCP sockets when using socket activation.
+with both UNIX sockets and TCP sockets, when using socket activation.
 
 Overview:
 | socket type | __--security-opt label=__ | systemd drop-in configuration file |

@@ -1,0 +1,7 @@
+[Unit]
+Description=MariaDB and Podman with socket activation for %I
+[Socket]
+ListenStream=%h/mariadb-socket.%i
+
+[Install]
+WantedBy=default.target

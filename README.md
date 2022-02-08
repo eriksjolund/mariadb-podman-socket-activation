@@ -13,63 +13,23 @@ __--network=none__.
 
 ## Installation
 
+Clone this repo
+
+```
+git clone URL
+cd mariadb-podman-socket-activation
+```
+
 Create the systemd user configuration directory if it is not already present
 
 ```
 mkdir -p ~/.config/systemd/user
 ```
 
-Create the file _~/.config/systemd/user/mariadb@.socket_ with the content
+Copy the systemd unit files to _~/.config/systemd/user_
 
 ```
-[Unit]
-Description=MariaDB and Podman with socket activation for %I
-[Socket]
-ListenStream=%h/mariadb-socket.%i
-
-[Install]
-WantedBy=default.target
-```
-
-Create the file _~/.config/systemd/user/mariadb@.service_ with the content
-
-```
-[Unit]
-Description=MariaDB and Podman with socket activation for %I
-Wants=network-online.target
-After=network-online.target
-RequiresMountsFor=%t/containers
-
-[Service]
-Environment=PODMAN_SYSTEMD_UNIT=%n-%i
-Restart=on-failure
-TimeoutStopSec=70
-ExecStartPre=/bin/rm -f %t/%n.ctr-id
-ExecStartPre=mkdir -p %h/mariadb-data.%i
-ExecStart=/usr/bin/podman run \
-  --cidfile=%t/%n.ctr-id \
-  --cgroups=no-conmon \
-  --rm \
-  --sdnotify=conmon \
-  --replace \
-  --name mariadb-%i \
-  --detach \
-  --volume %h/mariadb-data.%i:/var/lib/mysql:Z \
-  --env MARIADB_USER=example-user \
-  --security-opt label=disable \
-  --pull=never \
-  --network none \
-  --userns=keep-id \
-  --env MARIADB_PASSWORD=my \
-  --env MARIADB_ROOT_PASSWORD=my_root \
-    docker.io/library/mariadb:latest
-ExecStop=/usr/bin/podman stop --ignore --cidfile=%t/%n.ctr-id
-ExecStopPost=/usr/bin/podman rm -f --ignore --cidfile=%t/%n.ctr-id
-Type=notify
-NotifyAccess=all
-
-[Install]
-WantedBy=default.target
+cp mariadb@.socket mariadb@.service ~/.config/systemd/user
 ```
 
 Run
@@ -104,3 +64,22 @@ Bye
 $ 
 ```
 
+A new data directory was created for the MariaDB instance
+under _~/mariadb-data.foobar/_
+
+```
+$ ls -l ~/mariadb-data.foobar/
+total 123316
+-rw-rw----. 1 esjolund esjolund    417792 Feb  8 18:04 aria_log.00000001
+-rw-rw----. 1 esjolund esjolund        52 Feb  8 18:04 aria_log_control
+-rw-rw----. 1 esjolund esjolund         9 Feb  8 18:04 ddl_recovery.log
+-rw-rw----. 1 esjolund esjolund       946 Feb  8 18:04 ib_buffer_pool
+-rw-rw----. 1 esjolund esjolund  12582912 Feb  8 18:04 ibdata1
+-rw-rw----. 1 esjolund esjolund 100663296 Feb  8 18:07 ib_logfile0
+-rw-rw----. 1 esjolund esjolund  12582912 Feb  8 18:04 ibtmp1
+-rw-rw----. 1 esjolund esjolund         0 Feb  8 18:04 multi-master.info
+drwx------. 2 esjolund esjolund      4096 Feb  8 18:04 mysql
+drwx------. 2 esjolund esjolund        20 Feb  8 18:04 performance_schema
+drwx------. 2 esjolund esjolund      8192 Feb  8 18:04 sys
+$ 
+```

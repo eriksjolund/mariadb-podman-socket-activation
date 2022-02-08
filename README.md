@@ -1,0 +1,1 @@
+# mariadb-podman-socket-activation

@@ -6,7 +6,13 @@ and starts MariaDB with socket activation.
 Interestingly, it's possible to use `podman run --network=none ...`
 both with UNIX sockets and TCP sockets when using socket activation.
 
-This example just uses UNIX sockets.
+Overview:
+| socket type | __--security-opt label=__ | systemd drop-in configuration file |
+| --          | --                        | --                            |
+| TCP socket  | enable (the default)      | required to specify TCP port number |
+| UNIX socket | disable       | not required (UNIX socket path is created from specifyer expansion |
+
+Using TCP sockets is the more secure alternative because then SELINUX can stay enabled.
 
 ## Requirements
 
@@ -32,7 +38,7 @@ mkdir -p ~/.config/systemd/user
 Copy the systemd unit files to _~/.config/systemd/user_
 
 ```
-cp mariadb@.socket mariadb@.service ~/.config/systemd/user
+cp -r mariadb@.* ~/.config/systemd/user
 ```
 
 Run
@@ -43,10 +49,12 @@ systemctl --user daemon-reload
 
 ## Usage
 
+### Create a new MariaDB instance listening on a UNIX socket
+
 To create the new MariaDB instance _foobar_
 
 ```
-systemctl --user start mariadb@foobar.socket
+systemctl --user start mariadb-unix@foobar.socket
 ```
 
 To connect to the new MariaDB instance _foobar_
@@ -66,9 +74,8 @@ MariaDB [(none)]> \q
 Bye
 $ 
 ```
-
-A new data directory was created for the MariaDB instance
-under _~/mariadb-data.foobar/_
+The MariaDB instance used the bind-mounted directory _~/mariadb-data.demo/_
+to store its data:
 
 ```
 $ ls -l ~/mariadb-data.foobar/
@@ -84,5 +91,55 @@ total 123316
 drwx------. 2 esjolund esjolund      4096 Feb  8 18:04 mysql
 drwx------. 2 esjolund esjolund        20 Feb  8 18:04 performance_schema
 drwx------. 2 esjolund esjolund      8192 Feb  8 18:04 sys
+$ 
+```
+
+### Create a new MariaDB instance listening on a TCP socket
+
+To create the new MariaDB instance _demo_ that listens
+on the TCP port 8090
+
+```
+systemctl --user start mariadb-tcp@demo.socket
+```
+
+The port number 8090 was specified in
+_~/.config/systemd/user/mariadb-tcp@demo.socket.d/override.conf_
+
+To connect to the new MariaDB instance _demo_
+(type `my` as password to log in)
+```
+$ mariadb --port 8090 ~/mariadb-socket.demo -p -u example-user
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.6.5-MariaDB-1:10.6.5+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> \q
+Bye
+$ 
+```
+
+The MariaDB instance used the bind-mounted directory _~/mariadb-data.demo/_
+to store its data:
+
+```
+$ ls -l ~/mariadb-data.demo/
+total 123316
+-rw-rw----. 1 esjolund esjolund    417792 Feb  8 21:13 aria_log.00000001
+-rw-rw----. 1 esjolund esjolund        52 Feb  8 21:13 aria_log_control
+-rw-rw----. 1 esjolund esjolund         9 Feb  8 21:13 ddl_recovery.log
+-rw-rw----. 1 esjolund esjolund       946 Feb  8 21:13 ib_buffer_pool
+-rw-rw----. 1 esjolund esjolund  12582912 Feb  8 21:13 ibdata1
+-rw-rw----. 1 esjolund esjolund 100663296 Feb  8 21:17 ib_logfile0
+-rw-rw----. 1 esjolund esjolund  12582912 Feb  8 21:13 ibtmp1
+-rw-rw----. 1 esjolund esjolund         0 Feb  8 21:13 multi-master.info
+drwx------. 2 esjolund esjolund      4096 Feb  8 21:13 mysql
+drwx------. 2 esjolund esjolund        20 Feb  8 21:13 performance_schema
+drwx------. 2 esjolund esjolund      8192 Feb  8 21:13 sys
 $ 
 ```

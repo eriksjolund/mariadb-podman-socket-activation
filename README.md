@@ -109,7 +109,7 @@ _~/.config/systemd/user/mariadb-tcp@demo.socket.d/override.conf_
 To connect to the new MariaDB instance _demo_
 (type `my` as password to log in)
 ```
-$ mariadb --port 8090 ~/mariadb-socket.demo -p -u example-user
+$ mariadb -h 127.0.0.1 --port 8090 -p -u example-user
 Enter password: 
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 6

@@ -46,7 +46,7 @@ systemctl --user start mariadb@foobar.socket
 ```
 
 To connect to the new MariaDB instance _foobar_
-
+(type `my` as password to log in)
 ```
 $ mariadb --socket ~/mariadb-socket.foobar -p -u example-user
 Enter password: 

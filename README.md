@@ -14,6 +14,8 @@ Overview:
 
 Using TCP sockets is the more secure alternative because then SELINUX can stay enabled.
 
+Support for socket activation was added to MariaDB in release __10.6__ (released April 2021).
+
 ## Requirements
 
 * podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0-rc4__)

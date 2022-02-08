@@ -10,7 +10,7 @@ Overview:
 | socket type | __--security-opt label=__ | systemd drop-in configuration file |
 | --          | --                        | --                            |
 | TCP socket  | enable (the default)      | required to specify TCP port number |
-| UNIX socket | disable       | not required (use `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
+| UNIX socket | disable       | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
 
 Using TCP sockets is the more secure alternative because then SELINUX can stay enabled.
 

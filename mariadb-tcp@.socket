@@ -1,0 +1,9 @@
+[Unit]
+Description=MariaDB and Podman with socket activation for %I
+[Socket]
+
+# The port number of TCP socket will need to be specified
+# in a systemd drop-in configuration
+
+[Install]
+WantedBy=default.target

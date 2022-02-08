@@ -21,7 +21,6 @@ ExecStart=/usr/bin/podman run \
   --volume %h/mariadb-data.%i:/var/lib/mysql:Z \
   --env MARIADB_USER=example-user \
   --security-opt label=disable \
-  --pull=never \
   --network none \
   --userns=keep-id \
   --env MARIADB_PASSWORD=my \

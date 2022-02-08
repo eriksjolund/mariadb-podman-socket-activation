@@ -1,8 +1,12 @@
 # mariadb-podman-socket-activation
 
 A demo of a templated systemd user service that runs rootless Podman
-and starts MariaDB with socket activation. By only using UNIX sockets
-it's possible to run the container with __--network=none__.
+and starts MariaDB with socket activation.
+
+Interestingly, it's possible to use `podman run --network=none ...`
+both with UNIX sockets and TCP sockets when using socket activation.
+
+This example just uses UNIX sockets.
 
 ## Requirements
 

@@ -7,7 +7,7 @@ __--network=none__.
 
 ## Requirements
 
-* podman (version >= ?)
+* podman (version >= ?). (I tested with __4.0.0-rc4__)
 
 * mariadb client (TODO: try to use a container instead)
 

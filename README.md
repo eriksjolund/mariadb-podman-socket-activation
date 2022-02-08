@@ -74,11 +74,11 @@ MariaDB [(none)]> \q
 Bye
 $ 
 ```
-The MariaDB instance used the bind-mounted directory _~/mariadb-data.demo/_
+The MariaDB instance used the bind-mounted directory _~/mariadb-data-unix.foobar/_
 to store its data:
 
 ```
-$ ls -l ~/mariadb-data.foobar/
+$ ls -l ~/mariadb-data-unix.foobar/
 total 123316
 -rw-rw----. 1 esjolund esjolund    417792 Feb  8 18:04 aria_log.00000001
 -rw-rw----. 1 esjolund esjolund        52 Feb  8 18:04 aria_log_control
@@ -124,11 +124,11 @@ Bye
 $ 
 ```
 
-The MariaDB instance used the bind-mounted directory _~/mariadb-data.demo/_
+The MariaDB instance used the bind-mounted directory _~/mariadb-data-tcp.demo/_
 to store its data:
 
 ```
-$ ls -l ~/mariadb-data.demo/
+$ ls -l ~/mariadb-data-tcp.demo/
 total 123316
 -rw-rw----. 1 esjolund esjolund    417792 Feb  8 21:13 aria_log.00000001
 -rw-rw----. 1 esjolund esjolund        52 Feb  8 21:13 aria_log_control

@@ -9,7 +9,7 @@ Environment=PODMAN_SYSTEMD_UNIT=%n-%i
 Restart=on-failure
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/%n.ctr-id
-ExecStartPre=mkdir -p %h/mariadb-data.%i
+ExecStartPre=mkdir -p %h/mariadb-data-tcp.%i
 ExecStart=/usr/bin/podman run \
   --cidfile=%t/%n.ctr-id \
   --cgroups=no-conmon \

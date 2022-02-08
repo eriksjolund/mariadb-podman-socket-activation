@@ -6,7 +6,7 @@ it's possible to run the container with __--network=none__.
 
 ## Requirements
 
-* podman (version >= ?). (I tested with __4.0.0-rc4__)
+* podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0-rc4__)
 
 * mariadb client (TODO: try to use a container instead)
 

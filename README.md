@@ -53,7 +53,8 @@ systemctl --user daemon-reload
 
 ### Create a new MariaDB instance listening on a UNIX socket
 
-To create the new MariaDB instance _foobar_
+Create a UNIX socket from which the new MariaDB instance _foobar_ will
+be started via _socket activation_:
 
 ```
 systemctl --user start mariadb-unix@foobar.socket
@@ -98,8 +99,8 @@ $
 
 ### Create a new MariaDB instance listening on a TCP socket
 
-To create the new MariaDB instance _demo_ that listens
-on the TCP port 8090
+Create a TCP socket from which the new MariaDB instance _demo_ will
+be started via  _socket activation_:
 
 ```
 systemctl --user start mariadb-tcp@demo.socket

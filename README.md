@@ -51,7 +51,7 @@ systemctl --user daemon-reload
 
 ## Usage
 
-### Create a new MariaDB instance listening on a UNIX socket
+### Create a UNIX socket that activates a MariaDB instance
 
 Create a UNIX socket from which the new MariaDB instance _foobar_ will
 be started via _socket activation_:
@@ -98,7 +98,7 @@ drwx------. 2 esjolund esjolund      8192 Feb  8 18:04 sys
 $ 
 ```
 
-### Create a new MariaDB instance listening on a TCP socket
+### Create a TCP socket that activates a MariaDB instance
 
 Create a TCP socket from which the new MariaDB instance _demo_ will
 be started via  _socket activation_:

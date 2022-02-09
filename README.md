@@ -14,8 +14,6 @@ Overview:
 | TCP socket  | enable (the default)      | required to specify TCP port number |
 | UNIX socket | disable       | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
 
-Using TCP sockets is the more secure alternative because then SELINUX can stay enabled.
-
 Support for socket activation was added to MariaDB in release __10.6__ (released April 2021).
 
 ## Requirements

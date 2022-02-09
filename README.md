@@ -60,8 +60,9 @@ be started via _socket activation_:
 systemctl --user start mariadb-unix@foobar.socket
 ```
 
-To connect to the new MariaDB instance _foobar_
-(type `my` as password to log in)
+Connect to the new MariaDB instance _foobar_
+(type `my` as password to log in):
+
 ```
 $ mariadb --socket ~/mariadb-socket.foobar -p -u example-user
 Enter password: 
@@ -109,8 +110,9 @@ systemctl --user start mariadb-tcp@demo.socket
 The port number 8090 was specified in
 _~/.config/systemd/user/mariadb-tcp@demo.socket.d/override.conf_
 
-To connect to the new MariaDB instance _demo_
-(type `my` as password to log in)
+Connect to the new MariaDB instance _demo_
+(type `my` as password to log in):
+
 ```
 $ mariadb -h 127.0.0.1 --port 8090 -p -u example-user
 Enter password: 

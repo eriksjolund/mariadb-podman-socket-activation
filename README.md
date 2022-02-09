@@ -2,8 +2,8 @@
 
 __Status:__ proof of concept experiment
 
-A demo of a templated systemd user service that runs rootless Podman
-and starts MariaDB with socket activation.
+A demo of a templated systemd user service that runs rootless [Podman](https://podman.io)
+and starts [MariaDB](https://mariadb.org/) with socket activation.
 
 Interestingly, it's possible to use `podman run --network=none ...`
 with both UNIX sockets and TCP sockets, when using socket activation.

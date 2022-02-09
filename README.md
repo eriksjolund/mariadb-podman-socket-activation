@@ -1,5 +1,7 @@
 # mariadb-podman-socket-activation
 
+__Status:__ proof of concept experiment
+
 A demo of a templated systemd user service that runs rootless Podman
 and starts MariaDB with socket activation.
 

@@ -42,7 +42,7 @@ mkdir -p ~/.config/systemd/user
 Copy the systemd unit files to _~/.config/systemd/user_
 
 ```
-cp -r mariadb*@.* ~/.config/systemd/user
+cp -r mariadb*@* ~/.config/systemd/user
 ```
 
 Run

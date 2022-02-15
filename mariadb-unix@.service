@@ -18,13 +18,14 @@ ExecStart=/usr/bin/podman run \
   --replace \
   --name mariadb-%i \
   --detach \
-  --volume %h/mariadb-data.%i:/var/lib/mysql:Z \
-  --env MARIADB_USER=example-user \
+  --volume %h/mariadb-data-unix.%i:/var/lib/mysql:Z \
   --security-opt label=disable \
   --network none \
   --userns=keep-id \
+  --env MARIADB_USER=example-user \
   --env MARIADB_PASSWORD=my \
   --env MARIADB_ROOT_PASSWORD=my_root \
+  --env MARIADB_DATABASE=example \
     docker.io/library/mariadb:latest
 ExecStop=/usr/bin/podman stop --ignore --cidfile=%t/%n.ctr-id
 ExecStopPost=/usr/bin/podman rm -f --ignore --cidfile=%t/%n.ctr-id

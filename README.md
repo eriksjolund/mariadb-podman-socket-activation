@@ -16,6 +16,8 @@ Overview:
 
 Support for socket activation was added to MariaDB in release __10.6__ (released April 2021).
 
+__News 11 Feb 2022__: `--security-opt label=disable` is not needed anymore for Unix sockets when using [container-selinux](https://github.com/containers/container-selinux) version >= [__v2.178.0__](https://github.com/containers/container-selinux/releases/tag/v2.178.0) (see https://github.com/eriksjolund/mariadb-podman-socket-activation/issues/2).
+
 ## Requirements
 
 * podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0-rc4__)

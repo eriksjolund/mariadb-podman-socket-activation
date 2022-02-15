@@ -16,7 +16,7 @@ ExecStart=/usr/bin/podman run \
   --rm \
   --sdnotify=conmon \
   --replace \
-  --name mariadb-%i \
+  --name mariadb-unix-%i \
   --detach \
   --volume %h/mariadb-data-unix.%i:/var/lib/mysql:Z \
   --security-opt label=disable \

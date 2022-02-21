@@ -11,12 +11,11 @@ with both UNIX sockets and TCP sockets, when using socket activation.
 Overview:
 | socket type | __--security-opt label=__ | systemd drop-in configuration file |
 | --          | --                        | --                            |
-| TCP socket  | enable (the default)      | required to specify TCP port number |
-| UNIX socket | disable       | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
+| TCP socket  | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | required to specify TCP port number |
+| UNIX socket | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
 
 Support for socket activation was added to MariaDB in release __10.6__ (released April 2021).
-
-__News 11 Feb 2022__: `--security-opt label=disable` is not needed anymore for Unix sockets when using [container-selinux](https://github.com/containers/container-selinux) version >= [__v2.178.0__](https://github.com/containers/container-selinux/releases/tag/v2.178.0) (see https://github.com/eriksjolund/mariadb-podman-socket-activation/issues/2).
+[container-selinux](https://github.com/containers/container-selinux) [v2.179.0](https://github.com/containers/container-selinux/releases/tag/v2.179.0) was relased 21 Feb 2022.
 
 ## Requirements
 

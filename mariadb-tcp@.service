@@ -19,6 +19,7 @@ ExecStart=/usr/bin/podman run \
   --name mariadb-tcp-%i \
   --detach \
   --volume %h/mariadb-data-tcp.%i:/var/lib/mysql:Z \
+  --security-opt label=disable \
   --network none \
   --userns=keep-id \
   --env MARIADB_USER=example-user \

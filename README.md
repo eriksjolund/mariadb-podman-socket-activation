@@ -19,7 +19,7 @@ Support for socket activation was added to MariaDB in release __10.6__ (released
 
 ## Requirements
 
-* podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0-rc4__)
+* podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0__)
 
 * mariadb client (TODO: try to use a container instead)
 

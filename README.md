@@ -14,8 +14,11 @@ Overview:
 | TCP socket  | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | required to specify TCP port number |
 | UNIX socket | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
 
-Support for socket activation was added to MariaDB in release __10.6__ (released April 2021).
-[container-selinux](https://github.com/containers/container-selinux) [v2.179.0](https://github.com/containers/container-selinux/releases/tag/v2.179.0) was relased 21 Feb 2022.
+Support for _socket activation_ was added to
+
+* MariaDB in version __10.6__ (released April 2021)
+* Podman in version __3.4.0__ (released September 2021)
+* [container-selinux](https://github.com/containers/container-selinux) in version __v2.179.0__ (released February 2022)
 
 ## Requirements
 

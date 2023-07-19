@@ -5,25 +5,26 @@ __Status:__ proof of concept experiment
 A demo of a templated systemd user service that runs rootless [Podman](https://podman.io)
 and starts [MariaDB](https://mariadb.org/) with [systemd socket activation](https://www.freedesktop.org/software/systemd/man/systemd.socket.html).
 
-Interestingly, it's possible to use `podman run --network=none ...`
-with both UNIX sockets and TCP sockets, when using socket activation.
+## Introduction
 
-Overview:
-| socket type | __--security-opt label=__ | systemd drop-in configuration file |
-| --          | --                        | --                            |
-| TCP socket  | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | required to specify TCP port number |
-| UNIX socket | __enable__ when _container-linux_ >= v2.179.0 otherwise __disable__ | not required (use the `%i` [specifier](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers) to expand the instance name in the UNIX socket path) |
+Characteristics of using socket activation of containers with Podman
 
-Support for _socket activation_ was added to
-
-* MariaDB in version __10.6__ (released April 2021)
-* Podman in version __3.4.0__ (released September 2021)
-* [container-selinux](https://github.com/containers/container-selinux) in version __v2.179.0__ (released February 2022)
+* The `podman run` option __--publish__ is not used
+* The communication over the established TCP connection will run at native speed.
+  (Rootless Podman normally uses slirp4netns which comes with a performance penalty).
+  See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#native-network-performance-over-the-socket-activated-socket).
+* Possibility to use the `podman run` option __--network=none__ to restrict internet access
+  for the container. (A socket-activated TCP socket can still be used by the mariadb container).
+  See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#disabling-the-network-with---networknone) and the blog post [_How to limit container privilege with socket activation_](https://www.redhat.com/sysadmin/socket-activation-podman)
+* Possibility to use the systemd directive `RestrictAddressFamilies` to restrict general
+  internet access for Podman (and its helper programs like conmon and the OCI runtime).
+  See the blog post [_How to restrict network access in Podman with systemd_](https://www.redhat.com/sysadmin/podman-systemd-limit-access).
+* The source IP address is preserved when using socket activation. In some network configurations
+  when using rootless Podman that is not the case. See Podman GitHub [discussion](https://github.com/containers/podman/discussions/10472).
 
 ## Requirements
 
-* podman (These instructions have been verified to work with __podman 3.4.4__ and __podman 4.0.0__)
-
+* podman 3.4.4 (or newer)
 * mariadb client (TODO: try to use a container instead)
 
 ## Installation
